@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<!--
+	Shashishekhar Hasabnis 
+	|| Portfolio
+-->
+<html>
+	<head>
+		<title>Portfolio | Shashishekhar Hasabnis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/static/assets/css/main.css" />
+          <!-- Animate CSS CDN -->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>   
+	<noscript>
+        <link rel="stylesheet" href="/static/assets/css/noscript.css" />
+    </noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<a href="{{ url_for('home') }}" class="logo"><strong>Shashishekhar</strong> <span>Hasabnis</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="#banner" class="next scrolly">Home</a></li>
+							<li><a href="#one" class="next scrolly">Tech Stack</a></li>
+							<li><a href="#two" class="next scrolly">Projects</a></li>
+							<li><a href="#contact" class="next scrolly">Contact</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="{{ url_for('downloadResume') }}" class="button primary fit">Download Resume</a></li>
+						</ul>
+					</nav>
+
+				<!-- Banner -->
+					<section id="banner" class="major">
+						<div class="inner">
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                {% for message in messages %}
+                                    <a id="myDIV" class="button primary fit" onclick="myFunction()">{{ message }}</a>
+                                {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+							<header class="major">
+								<h1>Hi, my name is <strong>SHASHISHEKHAR</strong></h1>
+							</header>
+    
+							<div class="content">
+								<p>A Full Stack Web Developer, Quant Trader <br />
+								and Arduino based IoT is my passion.</p>
+								<ul class="actions">
+									<li><a href="#one" class="button next scrolly">Read More</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+                        <!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h1>TECH STACK</h1>
+									</header>
+
+                                    <div class="row">
+                                        <div class="col-4 col-12-medium">
+                                            <section class="skills" id="skills">
+                                                <h2>Frontend</h2>
+                                          
+                                                <div class="skills-wrapper">
+                                                  <div class="first-set animate__animated animate__pulse">
+                                                    <img
+                                                      src="/static/assets/icons/HTML5.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                    <img
+                                                      src="/static/assets/icons/CSS3.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                    <img
+                                                      src="/static/assets/icons/Vue.js.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                    <img
+                                                      src="/static/assets/icons/JavaScript.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                  </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-4 col-12-medium">
+                                            <section class="skills" id="skills">
+                                                <h2>Backend</h2>
+                                          
+                                                <div class="skills-wrapper">
+                                                  <div class="first-set animate__animated animate__pulse">
+                                                    <img
+                                                      src="/static/assets/icons/Django.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                    <img
+                                                      src="/static/assets/icons/Flask.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                    <img
+                                                      src="/static/assets/icons/Python.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                    <img
+                                                      src="/static/assets/icons/Pandas.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                  </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-4 col-12-medium">
+                                            <section class="skills" id="skills">
+                                                <h2>Version Control</h2>
+                                          
+                                                <div class="skills-wrapper">
+                                                  <div class="first-set animate__animated animate__pulse">
+                                                    <img
+                                                      src="/static/assets/icons/Git.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                    <img
+                                                      src="/static/assets/icons/GitHub.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                    <img
+                                                      src="/static/assets/icons/GitLab.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                    <img
+                                                      src="/static/assets/icons/Docker.png"
+                                                      alt=""
+                                                      loading="lazy"
+                                                      class="icon icon-card"
+                                                    />
+                                                  </div>
+                                                </div>
+                                            </section>                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </section>
+
+                            <!-- Two -->
+							<section id="two">
+								<div class="inner">
+									<header class="major">
+										<h2>Projects</h2>
+									</header>
+									<p>Some of the notable projects that I reckon doing over the past years are mentioned below.</p>
+								</div>
+							</section>
+                        
+
+						<!-- Three -->
+							<section id="three" class="tiles">
+								<article>
+									<span class="image">
+										<img src="/static/images/pic20.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('bad') }}" class="link">Blend All Databases (BAD Tool)</a></h3>
+										<p>A tool that allows you to interact with multiple databases simultaneously.</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="/static/images/pic13.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('yupbot') }}" class="link">YupBot</a></h3>
+										<p>An online chatbot that can take surveys anonymously and give you a statistical overview.</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="/static/images/pic14.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('summarizer') }}" class="link">Chrome Summarizer</a></h3>
+										<p>An extension for Google Chrome that can summarize the web page within the specified limit.</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="/static/images/pic21.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('lms') }}" class="link">LMS</a></h3>
+										<p>A full fledged online Learning Management System.</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="/static/images/pic22.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('trading_bot') }}" class="link">Trading Bot</a></h3>
+										<p>Had ranked my trading strategy on numer.ai in top 10 performers for July 2024</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="/static/images/pic17.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('dprinter') }}" class="link">3D Printer</a></h3>
+										<p>A small scale 3D Printer of size 5x5 built to print 3D models of toys for my kids.</p>
+									</header>
+								</article>
+							</section>
+
+						
+
+					</div>
+
+				<!-- Contact -->
+					<section id="contact">
+						<div class="inner">
+							<section>
+								<form method="post" action="{{ url_for('home') }}">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" value="{{ request.form['name'] }}" required />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="email" name="email" id="email" value="{{ request.form['email'] }}" required />
+										</div>
+										<div class="field">
+											<label for="message">Message</label>
+											<textarea name="message" id="message" rows="6" required >{{ request.form['message'] }}</textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" class="primary" /></li>
+										<li><input type="reset" value="Clear" /></li>
+									</ul>
+								</form>
+							</section>
+							<section class="split">
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-envelope"></span>
+										<h3>Email</h3>
+										<a href="#">shashishekhar1001@gmail.com</a>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-phone"></span>
+										<h3>Phone</h3>
+										<span>(+91) 9767978176</span>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-home"></span>
+										<h3>Address</h3>
+										<span>D1/104 Sunder Srushti, Sun City<br />
+										Anandnagar, Pune 411051<br />
+										Maharashtra, India</span>
+									</div>
+								</section>
+							</section>
+						</div>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; 2025</li><li>Design: <a href="">Shashishekhar Hasabnis</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/static/assets/js/jquery.min.js"></script>
+			<script src="/static/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/static/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/static/assets/js/browser.min.js"></script>
+			<script src="/static/assets/js/breakpoints.min.js"></script>
+			<script src="/static/assets/js/util.js"></script>
+			<script src="/static/assets/js/main.js"></script>
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("myDIV");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                    } else {
+                        x.style.display = "none";
+                    }
+                }
+            </script>
+	</body>
+</html>
