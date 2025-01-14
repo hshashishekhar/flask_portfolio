@@ -27,10 +27,10 @@
 				<!-- Menu -->
 					<nav id="menu">
 						<ul class="links">
-							<li><a href="index.html">Portfolio</a></li>
-							<li><a href="index.html#one">Tech Stack</a></li>
-							<li><a href="index.html#two">Projects</a></li>
-							<li><a href="index.html#contact">Contact</a></li>
+							<li><a href="{{ url_for('home') }}">Portfolio</a></li>
+							<li><a href="{{ url_for('home') }}#one">Tech Stack</a></li>
+							<li><a href="{{ url_for('home') }}#two">Projects</a></li>
+							<li><a href="{{ url_for('home') }}#contact">Contact</a></li>
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="{{ url_for('downloadResume') }}" class="button primary fit">Download Resume</a></li>
