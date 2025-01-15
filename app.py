@@ -51,6 +51,10 @@ def downloadResume():
         as_attachment=True
     )
 
+@app.route("/icons")
+def icons():
+    return render_template('icons.html')
+
 if __name__== "__main__":
     app.run()
 
