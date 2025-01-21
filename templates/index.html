@@ -4,6 +4,27 @@
 	|| Portfolio
 -->
 <html>
+	<style> .loader {
+		position: fixed;
+		background-color: #000000;
+		opacity: 1;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		overflow: hidden;
+		display: flex; 
+		flex-direction: row; 
+		align-items: center; 
+		justify-content: center;
+		scrollbar-width: none;
+	  }
+	</style>
+	<div class="loader">
+		<img class="animation--Gl63I" srcset="https://cdn.pixabay.com/animation/2023/05/17/22/20/22-20-39-354_256.gif 1x, https://cdn.pixabay.com/animation/2023/05/17/22/20/22-20-39-354_512.gif 2x" src="https://cdn.pixabay.com/animation/2023/05/17/22/20/22-20-39-354_512.gif" alt="Free Galaxy GIF and Nebula GIF" style="max-width: 1000px; max-height: 1000px;">
+		<!-- Your Content For Load Screen -->
+	  </div>
 	<head>
 		<title>Portfolio | Shashishekhar Hasabnis</title>
 		<meta charset="utf-8" />
@@ -448,4 +469,36 @@
                 }
             </script>
 	</body>
+	<style>
+		.loader {
+			-webkit-animation: load-out 0s;
+			animation: load-out 0s;
+			-webkit-animation-fill-mode: forwards;
+			animation-fill-mode: forwards;
+		}
+		
+		@-webkit-keyframes load-out {
+			from {
+				top: 0;
+				opacity: 1;
+			}
+		
+			to {
+				top: 100%;
+				opacity: 0;
+			}
+		}
+		
+		@keyframes load-out {
+			from {
+				top: 0;
+				opacity: 1;
+			}
+		
+			to {
+				top: 100%;
+				opacity: 0;
+			}
+		}
+		</style>
 </html>
