@@ -15,10 +15,12 @@ app.config['SECRET_KEY'] = 'df0331cefc6c2b9a5d0208a726a5d1c0fd37324feba25506'
 app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///' + os.path.join(basedir, 'database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Database & Login System
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
+# For Password Hashing
 bcrypt = Bcrypt(app)
 
 class User(UserMixin, db.Model):
@@ -26,9 +28,10 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
 
-    def __str__(self):
+    def __repr__(self):
         return f'{self.username}'
 
+# Database Tables
 class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -37,12 +40,21 @@ class Contact(db.Model):
                            server_default=str(datetime.now()))
     message = db.Column(db.Text)
 
-    def __str__(self):
-        return f'{self.name} {self.email}'
+    def __repr__(self):
+        return f'{self.name}'
 
+class DownloadCount(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    count = db.Column(db.Integer, default=0)
+
+    def __repr__(self):
+        return f'{self.count}'
+
+# Create Tables if do not exist
 with app.app_context():
     db.create_all()
 
+# Authenticarion System
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -93,6 +105,7 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+# Home
 @app.route("/", methods=('GET', 'POST'))
 def home():
     if request.method == 'POST':
@@ -109,6 +122,7 @@ def home():
         return redirect(url_for('home'))
     return render_template('index.html')
 
+# Projects
 @app.route("/bad")
 def bad():
     return render_template('bad.html')
@@ -133,17 +147,42 @@ def summarizer():
 def yupbot():
     return render_template('yupbot.html')
 
+# Download resume
 @app.route('/downloadResume') # this is a job for GET, not POST
 def downloadResume():
+    if not DownloadCount.query.first():
+        default_count = DownloadCount(count=0)
+        db.session.add(default_count)
+        db.session.commit()
+    else:
+        download_counter = DownloadCount.query.first()
+        download_counter.count += 1
+        db.session.commit()
     return send_file(
         'resume.pdf',
         download_name='Shashishekhar Python Developer.pdf',
         as_attachment=True
     )
 
-@app.route("/icons")
-def icons():
-    return render_template('icons.html')
+# Admin Section
+@app.route("/admin/users")
+def user_list():
+    users = db.session.execute(db.select(User).order_by(User.username)).scalars()
+    return render_template("user_list.html", users=users)
+
+
+@app.route("/admin")
+def admin():
+    user_count = User.query.count()
+    message_count = Contact.query.count()
+    download_counter = DownloadCount.query.first()
+    download_count = download_counter.count
+    context = {
+        'user_count': user_count,
+        'message_count': message_count,
+        'download_count':download_count
+    }
+    return render_template("admin_base.html", **context)
 
 
 

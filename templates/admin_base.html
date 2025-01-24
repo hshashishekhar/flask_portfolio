@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/assets/css/admin_style.css">
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Fixed Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <!-- Logo -->
+                <div class="sidebar-logo">
+                    <h1>Dashboard</h1>
+                </div>
+
+                <!-- Navigation Links -->
+                <ul class="sidebar-links">
+                    <li>
+                        <a href="{{ url_for('home') }}" class="sidebar-link">
+                            <i class="fas fa-home sidebar-icon"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-link">
+                            <i class="fa-solid fa-circle-user sidebar-icon"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-file-alt sidebar-icon"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-cog sidebar-icon"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Shashishekhar Hasabnis</h1>
+                <div class="header-profile">
+                    <!-- Theme Toggle Button -->
+                    <button id="themeToggle" class="theme-toggle">
+                        <i id="themeIcon" class="fas fa-sun theme-icon"></i>
+                    </button>
+                </div>
+            </header>
+            {% block content %}
+            <!-- Cards Section -->
+            <div class="cards-grid">
+                <!-- Card 1: Userss -->
+                <div class="card">
+                    <div class="card-icon bg-blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-content">
+                        <h2>Users</h2>
+                        <p>{{ user_count }}</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Messages -->
+                <div class="card">
+                    <div class="card-icon bg-green">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="card-content">
+                        <h2>Messages</h2>
+                        <p>{{ message_count }}</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Downloads -->
+                <div class="card">
+                    <div class="card-icon bg-purple">
+                        <i class="fa-solid fa-download"></i>
+                    </div>
+                    <div class="card-content">
+                        <h2>Downloads</h2>
+                        <p>{{ download_count }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h2>Sales Chart</h2>
+                    <canvas id="salesChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2>Visitors Chart</h2>
+                    <canvas id="visitorsChart"></canvas>
+                </div>
+            </div>
+            <!-- Table Section -->
+            <div class="table-container">
+                <h2>Recent Orders</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#12345</td>
+                                <td>John Doe</td>
+                                <td>2023-10-01</td>
+                                <td>$120.00</td>
+                                <td><span class="status completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>#12346</td>
+                                <td>Jane Smith</td>
+                                <td>2023-10-02</td>
+                                <td>$250.00</td>
+                                <td><span class="status pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>#12347</td>
+                                <td>Alice Johnson</td>
+                                <td>2023-10-03</td>
+                                <td>$75.00</td>
+                                <td><span class="status cancelled">Cancelled</span></td>
+                            </tr>
+                            <tr>
+                                <td>#12348</td>
+                                <td>Bob Brown</td>
+                                <td>2023-10-04</td>
+                                <td>$300.00</td>
+                                <td><span class="status completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>#12349</td>
+                                <td>Charlie Davis</td>
+                                <td>2023-10-05</td>
+                                <td>$150.00</td>
+                                <td><span class="status pending">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endblock %}
+        </main>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/assets/js/admin_script.js"></script>
+    {% block footer %}
+    {% endblock %}
+</body>
+</html>

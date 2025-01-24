@@ -1,0 +1,47 @@
+{% extends "admin_base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<!-- Table Section -->
+<div class="table-container">
+    <h2>Recent Orders</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{  user.id }}</td>
+                    <td>{{  user.username }}</td>
+                    <td>{{  user.password }}</td>
+                    <td>
+                        <button class='btn modify data-twe-toggle="modal"
+                        data-twe-target="#exampleModal"
+                        data-twe-ripple-init
+                        data-twe-ripple-color="light"'><i class="fas fa-edit"></i> Modify</button>
+                        <button class="btn delete"><i class="fas fa-trash"></i> Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Add User Button -->
+        <button class="btn add"><i class="fas fa-plus"></i> Add User</button>
+    </div>
+</div>
+
+<!-- Modal for Editing Order -->
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
