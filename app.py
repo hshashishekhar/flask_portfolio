@@ -55,10 +55,22 @@ class DownloadCount(db.Model):
 with app.app_context():
     db.create_all()
 
-# Authenticarion System
+# Authentication System
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+# Custom Decorator for Specific Username
+def username_required(username):
+    def decorator(view_func):
+        @login_required  # Ensure the user is logged in
+        def wrapped_view(*args, **kwargs):
+            if current_user.username != username:
+                flash('You do not have permission to access this page.', 'error')
+                return redirect(url_for('index'))  # Redirect to home or another page
+            return view_func(*args, **kwargs)
+        return wrapped_view
+    return decorator
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
@@ -168,12 +180,20 @@ def downloadResume():
 # Admin Section
 # CRUD for Users
 @app.route("/admin/users")
+@login_required  # Only the user with username 'admin' can access this route
 def user_list():
+    if current_user.username != 'admin':
+        flash('You do not have permission to access this page.', 'error')
+        return redirect(url_for('home'))  # Redirect to home or another page
     users = db.session.execute(db.select(User).order_by(User.username)).scalars()
     return render_template("user_list.html", users=users)
 
 @app.route('/admin/users/<id>', methods=('GET', 'POST'))
+@login_required  # Only the user with username 'admin' can access this route
 def user_detail(id):
+    if current_user.username != 'admin':
+        flash('You do not have permission to access this page.', 'error')
+        return redirect(url_for('home'))  # Redirect to home or another page
     if request.method == 'POST':
         id = request.form['id']
         name = request.form['name']
@@ -185,13 +205,21 @@ def user_detail(id):
     return render_template('user_detail.html', user_info=user_info)
 
 @app.route('/admin/delete/user/<id>')
+@login_required  # Only the user with username 'admin' can access this route
 def delete_user(id):
+    if current_user.username != 'admin':
+        flash('You do not have permission to access this page.', 'error')
+        return redirect(url_for('home'))  # Redirect to home or another page
     User.query.filter_by(id=id).delete()
     db.session.commit()
     return redirect(url_for('user_list'))
 
 @app.route('/admin/users/add', methods=['POST'])
+@login_required  # Only the user with username 'admin' can access this route
 def add_user():
+    if current_user.username != 'admin':
+        flash('You do not have permission to access this page.', 'error')
+        return redirect(url_for('home'))  # Redirect to home or another page
     if request.method == 'POST':
         name = request.form['username']
         hashed_password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
@@ -202,17 +230,26 @@ def add_user():
 
 # MESSAGES READ & DELETE
 @app.route("/admin/messages")
+@login_required  # Only the user with username 'admin' can access this route
 def messages():
+    if current_user.username != 'admin':
+        flash('You do not have permission to access this page.', 'error')
+        return redirect(url_for('home'))  # Redirect to home or another page
     messages = db.session.execute(db.select(Contact).order_by(desc(Contact.id))).scalars()
     return render_template("messages.html", messages=messages)
 
 @app.route('/admin/delete/message/<id>')
+@login_required
 def delete_message(id):
+    if current_user.username != 'admin':
+        flash('You do not have permission to access this page.', 'error')
+        return redirect(url_for('home'))  # Redirect to home or another page
     Contact.query.filter_by(id=id).delete()
     db.session.commit()
     return redirect(url_for('messages'))
 
 @app.route("/admin")
+@username_required('admin')  # Only the user with username 'admin' can access this route
 def admin():
     user_count = User.query.count()
     message_count = Contact.query.count()
