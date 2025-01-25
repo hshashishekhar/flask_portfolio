@@ -1,0 +1,45 @@
+{% extends "admin_base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<!-- Table Section -->
+<div class="table-container">
+    <h2>Messages</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in messages %}
+                
+                <tr>
+                    
+                        <td>{{ message.id }}</td>
+                        <td>{{ message.name }}</td>
+                        <td>{{ message.email }}</td>
+                        <td>{{ message.message }}</td>
+                        <td>
+                            <a href="{{ url_for('delete_message', id=message.id) }}" class="btn delete"><i class="fas fa-trash"></i></a>
+                        </td>
+                </tr>
+                
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

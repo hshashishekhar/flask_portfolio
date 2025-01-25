@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, flash, request, send_file
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
 from datetime import datetime
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -199,11 +200,17 @@ def add_user():
         db.session.commit()
         return redirect(url_for('user_list'))
 
+# MESSAGES READ & DELETE
 @app.route("/admin/messages")
 def messages():
-    messages = db.session.execute(db.select(Contact).order_by(Contact.created_at)).scalars()
+    messages = db.session.execute(db.select(Contact).order_by(desc(Contact.id))).scalars()
     return render_template("messages.html", messages=messages)
 
+@app.route('/admin/delete/message/<id>')
+def delete_message(id):
+    Contact.query.filter_by(id=id).delete()
+    db.session.commit()
+    return redirect(url_for('messages'))
 
 @app.route("/admin")
 def admin():
