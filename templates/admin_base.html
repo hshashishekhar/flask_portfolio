@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/assets/css/admin_style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     {% block head %}
     {% endblock %}
 </head>
@@ -33,13 +34,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="sidebar-link">
+                        <a href="{{ url_for('user_list') }}" class="sidebar-link">
                             <i class="fa-solid fa-circle-user sidebar-icon"></i>
                             <span>Users</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="sidebar-link">
+                        <a href="{{ url_for('messages') }}" class="sidebar-link">
                             <i class="fas fa-file-alt sidebar-icon"></i>
                             <span>Messages</span>
                         </a>

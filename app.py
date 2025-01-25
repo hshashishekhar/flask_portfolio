@@ -165,10 +165,44 @@ def downloadResume():
     )
 
 # Admin Section
+# CRUD for Users
 @app.route("/admin/users")
 def user_list():
     users = db.session.execute(db.select(User).order_by(User.username)).scalars()
     return render_template("user_list.html", users=users)
+
+@app.route('/admin/users/<id>', methods=('GET', 'POST'))
+def user_detail(id):
+    if request.method == 'POST':
+        id = request.form['id']
+        name = request.form['name']
+        user = User.query.filter_by(id=id).first()
+        user.username = name
+        db.session.commit()
+        return redirect(url_for('user_list'))
+    user_info = User.query.filter_by(id=id).first()
+    return render_template('user_detail.html', user_info=user_info)
+
+@app.route('/admin/delete/user/<id>')
+def delete_user(id):
+    User.query.filter_by(id=id).delete()
+    db.session.commit()
+    return redirect(url_for('user_list'))
+
+@app.route('/admin/users/add', methods=['POST'])
+def add_user():
+    if request.method == 'POST':
+        name = request.form['username']
+        hashed_password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
+        user = User(username=name, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('user_list'))
+
+@app.route("/admin/messages")
+def messages():
+    messages = db.session.execute(db.select(Contact).order_by(Contact.created_at)).scalars()
+    return render_template("messages.html", messages=messages)
 
 
 @app.route("/admin")
